@@ -1,7 +1,7 @@
 '''
 This document defines the user-reported balance of the chassis at the initial setup, expressed in a matrix, to which tuning masks will be applied.
 
-The user is prompted to qualitatively report all vehicle properties according to their scales. Further explaination to follow.
+The user is prompted to qualitatively report all vehicle properties according to their scales, to form the initial vehicle state in the handling matrix below.
 NeutralizeSimChassisTuning optimizes towards the ideal of each scale, 0.
 Matrix form defined below:
 
@@ -14,6 +14,8 @@ Matrix form defined below:
     ],
     [ _,], Suspension stiffness bias, Too Soft(-5) <-----> Neutral(0) <-----> Too Stiff(5)
     [ _,]  Downforce/drag bias, Insufficient Downforce(-5) <-----> Neutral(0) <-----> Excessive Drag(5)
+
+How to fill each value:
 
 Initial braking: This describes braking in a straight line, from initial brake application until the first steering action. Instability in this phase is felt as the rear brakes locking up before the fronts, sometimes described as 'the back stepping out'. Stability in this phase is the front brakes locking up before the rears. Even if the brakes don't lock fully, there might be partial brake locking in this phase, perhaps over rough road or curbs, felt as the car 'wiggling' or 'sliding' under braking.
 

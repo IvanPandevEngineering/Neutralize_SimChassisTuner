@@ -1,5 +1,5 @@
 '''
-This document defines the tuning masks; a matrix of the expected effects for a step of each tuning step described.
+This document defines the tuning masks; a matrix of the expected effects for a step of each tuning option described.
 Each value in a tuning mask will represent a delta of the chassis balance matrix, as defined in chassis_balance.py.
 
     [  Initial braking, turn-in, mid-corner, corner-exit-inital, throttle-out
@@ -11,7 +11,6 @@ Each value in a tuning mask will represent a delta of the chassis balance matrix
     ],
     [ _,], Suspension stiffness bias, Too Soft(-5) <-----> Neutral(0) <-----> Too Stiff(5)
     [ _,]  Downforce/drag bias, Insufficient Downforce(-5) <-----> Neutral(0) <-----> Excessive Drag(5)
-
 '''
 
 import numpy as np
@@ -31,7 +30,13 @@ brake_bias_forward = [
     str('Reduces rear brake lockup on initial brake application. Decreases rotation during trail-braking.')
 ]
 
-#brake_bias_rearward = -brake_bias_forward
+brake_bias_rearward = [
+    -brake_bias_forward[0],
+    -brake_bias_forward[1],
+    -brake_bias_forward[2],
+    str('One step increasing brake bias rearward %.'),
+    str('Increases rear brake lockup on initial brake application. Increases rotation during trail-braking.')
+]
 
 ### SUSPENSION TUNING PARAMETERS ###
 
@@ -81,6 +86,6 @@ increase_wingAOA = [
 #decrease_wingAOA = -increase_wingAOA
 
 tuning_options = [
-    brake_bias_forward,
+    brake_bias_forward, brake_bias_rearward,
     stiffen_rear_ARB
 ]
