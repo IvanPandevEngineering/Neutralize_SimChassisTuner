@@ -49,13 +49,21 @@ def neutralize(iterations, initial_state, tuning_options):
     steps=[]
     descriptions=[]
 
-    for all in range(iterations):
+    for i in range(iterations):
         tuning_option = chose_tuning_option(initial_state=new_state, all_tuning_options=tuning_options)
         masks.append((tuning_option[0], tuning_option[1], tuning_option[2]))
         new_state = make_adjustment(initial=new_state, tuning=tuning_option)
         steps.append(new_state[3])
         descriptions.append(new_state[4])
 
+        print(f'''
+########## In iteration {i+1}, ##########\n
+The tuning step: "{new_state[3]}" was the most effective in reducing the handling matrix loss. \n
+Tuning step description: "{new_state[4]}" \n
+Tuning step delta:\n {tuning_option[:3]} \n
+Handling matrix after tuning step is applied will be approximately:\n {new_state[:3]}
+        ''')
+
     return new_state[:3], masks, steps, descriptions
 
-print(neutralize(iterations=2, initial_state=chassis_initial_state, tuning_options=tuning_options))
+neutralize(iterations=2, initial_state=chassis_initial_state, tuning_options=tuning_options)

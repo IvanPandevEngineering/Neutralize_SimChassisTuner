@@ -17,6 +17,15 @@ import numpy as np
 
 ### BRAKE TUNING PARAMTERS ###
 
+def reverse_tuning(tuning_option):
+    return [
+        -tuning_option[0],
+        -tuning_option[1],
+        -tuning_option[2],
+        tuning_option[3],
+        tuning_option[4]
+    ]
+
 brake_bias_forward = [
     np.array([
         [ 1, 1, 0, 0, 0,],
@@ -30,13 +39,7 @@ brake_bias_forward = [
     str('Reduces rear brake lockup on initial brake application. Decreases rotation during trail-braking.')
 ]
 
-brake_bias_rearward = [
-    -brake_bias_forward[0],
-    -brake_bias_forward[1],
-    -brake_bias_forward[2],
-    str('One step increasing brake bias rearward %.'),
-    str('Increases rear brake lockup on initial brake application. Increases rotation during trail-braking.')
-]
+brake_bias_rearward = reverse_tuning(brake_bias_forward)
 
 ### SUSPENSION TUNING PARAMETERS ###
 
@@ -53,7 +56,7 @@ stiffen_rear_ARB = [
     str('Increases oversteer in all corner phases.')
 ]
 
-#soften_rear_ARB = -stiffen_rear_ARB
+soften_rear_ARB = reverse_tuning(stiffen_rear_ARB)
 
 ### DIFFERENTIAL TUNING PARAMETERS ###
 
