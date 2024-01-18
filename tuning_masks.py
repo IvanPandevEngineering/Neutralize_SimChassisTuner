@@ -47,10 +47,10 @@ stiffen_front_ARB = [
 
 soften_front_ARB = [
     np.array([
-        [ -.25, -1, -1, -1, -1,],
-        [ -.25, -1, -1, -1, -1,],
-        [ -.25, -1, -1, -1, -1,],
-        [ -.25, -1, -1, -1, -1,]
+        [ -.25, -1, -1, -1, -1],
+        [ -.25, -1, -1, -1, -1],
+        [ -.25, -1, -1, -1, -1],
+        [ -.25, -1, -1, -1, -1]
     ]),
     -1,
     0,
@@ -84,9 +84,22 @@ soften_rear_ARB = [
     str('Increases understeer in all corner phases.')
 ]
 
+increase_front_negative_camber = [
+    np.array([
+        [ .5, 0, -.5, -.5, -.5],
+        [ .5, 0, -.5, -.5, -.5],
+        [ .5, 0, -.5, -.5, -.5],
+        [ .5, 0, -.5, -.5, -.5]
+    ]),
+    -1,
+    0,
+    str('Increase front negative camber ~0.25 degrees.'),
+    str('On most suspensions and tires, increasing negative camber until about -5 degrees should continue to increase front tire lateral grip potential, at the cost of front tire braking grip potential.  ')
+]
+
 ### DIFFERENTIAL TUNING PARAMETERS ###
 
-increase_preload = [
+increase_diff_preload = [
     [
         [ 0.5, 1, 0, -1, -1,],
         [ 0.5, 1, 0, -1, -1,],
@@ -94,7 +107,22 @@ increase_preload = [
         [ 0.5, 1, 0, -1, -1,]
     ],
     [0],
-    [0]
+    [0],
+    str('Increase differential preload one step.'),
+    str('Increases stability during braking and turn-in in corner entry phases, but also increases throttle-steer and oversteer in corner exit phases.')
+]
+
+decrease_diff_preload = [
+    [
+        [ -0.5, -1, 0, 1, 1,],
+        [ -0.5, -1, 0, 1, 1,],
+        [ -0.5, -1, 0, 1, 1,],
+        [ -0.5, -1, 0, 1, 1,]
+    ],
+    [0],
+    [0],
+    str('Decrease differential preload one step.'),
+    str('Decreases stability during braking and turn-in in corner entry phases (quicker rotation), but also decreases throttle-steer and oversteer in corner exit phases. Lowering this parameter too much can cause "one-tire-fires" akin to an open differential during power application.')
 ]
 
 #decrease_preload = -increase_preload
@@ -117,5 +145,7 @@ increase_wingAOA = [
 tuning_options = [
     brake_bias_forward,
     stiffen_front_ARB, soften_front_ARB,
-    stiffen_rear_ARB, soften_rear_ARB
+    stiffen_rear_ARB, soften_rear_ARB,
+    increase_front_negative_camber,
+    increase_diff_preload, decrease_diff_preload
 ]
