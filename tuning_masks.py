@@ -17,15 +17,6 @@ import numpy as np
 
 ### BRAKE TUNING PARAMTERS ###
 
-def reverse_tuning(tuning_option):
-    return [
-        -tuning_option[0],
-        -tuning_option[1],
-        -tuning_option[2],
-        tuning_option[3],
-        tuning_option[4]
-    ]
-
 brake_bias_forward = [
     np.array([
         [ 1, 1, 0, 0, 0,],
@@ -39,9 +30,33 @@ brake_bias_forward = [
     str('Reduces rear brake lockup on initial brake application. Decreases rotation during trail-braking.')
 ]
 
-brake_bias_rearward = reverse_tuning(brake_bias_forward)
-
 ### SUSPENSION TUNING PARAMETERS ###
+
+stiffen_front_ARB = [
+    np.array([
+        [ .25, 1, 1, 1, 1,],
+        [ .25, 1, 1, 1, 1,],
+        [ .25, 1, 1, 1, 1,],
+        [ .25, 1, 1, 1, 1,]
+    ]),
+    1,
+    0,
+    str('One step stiffening front sway bar. (Increase bar diamater or shorten arm length).'),
+    str('Increases understeer in all corner phases.')
+]
+
+soften_front_ARB = [
+    np.array([
+        [ -.25, -1, -1, -1, -1,],
+        [ -.25, -1, -1, -1, -1,],
+        [ -.25, -1, -1, -1, -1,],
+        [ -.25, -1, -1, -1, -1,]
+    ]),
+    -1,
+    0,
+    str('One step softening front sway bar. (Decrease bar diamater or lengthen arm).'),
+    str('Increases oversteer in all corner phases.')
+]
 
 stiffen_rear_ARB = [
     np.array([
@@ -56,7 +71,18 @@ stiffen_rear_ARB = [
     str('Increases oversteer in all corner phases.')
 ]
 
-soften_rear_ARB = reverse_tuning(stiffen_rear_ARB)
+soften_rear_ARB = [
+    np.array([
+        [ .25, 1, 1, 1, 1,],
+        [ .25, 1, 1, 1, 1,],
+        [ .25, 1, 1, 1, 1,],
+        [ .25, 1, 1, 1, 1,]
+    ]),
+    -1,
+    0,
+    str('One step softening rear sway bar. (Decrease bar diamater or lengthen arm).'),
+    str('Increases understeer in all corner phases.')
+]
 
 ### DIFFERENTIAL TUNING PARAMETERS ###
 
@@ -89,6 +115,7 @@ increase_wingAOA = [
 #decrease_wingAOA = -increase_wingAOA
 
 tuning_options = [
-    brake_bias_forward, brake_bias_rearward,
-    stiffen_rear_ARB
+    brake_bias_forward,
+    stiffen_front_ARB, soften_front_ARB,
+    stiffen_rear_ARB, soften_rear_ARB
 ]
