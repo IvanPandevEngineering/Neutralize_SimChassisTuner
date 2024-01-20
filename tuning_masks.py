@@ -15,6 +15,19 @@ Each value in a tuning mask will represent a delta of the chassis balance matrix
 
 import numpy as np
 
+null = [
+    np.array([
+        [ 0, 0, 0, 0, 0,],
+        [ 0, 0, 0, 0, 0,],
+        [ 0, 0, 0, 0, 0,],
+        [ 0, 0, 0, 0, 0,],
+    ]),
+    0,
+    0,
+    None,
+    None
+]
+
 ### BRAKE TUNING PARAMTERS ###
 
 brake_bias_forward = [
@@ -91,7 +104,7 @@ increase_front_negative_camber = [
         [ .5, 0, -.5, -.5, -.5],
         [ .5, 0, -.5, -.5, -.5]
     ]),
-    -1,
+    0,
     0,
     str('Increase front negative camber ~0.25 degrees.'),
     str('On most suspensions and tires, increasing negative camber until about -5 degrees should continue to increase front tire lateral grip potential, at the cost of front tire braking grip potential.  ')
@@ -100,27 +113,27 @@ increase_front_negative_camber = [
 ### DIFFERENTIAL TUNING PARAMETERS ###
 
 increase_diff_preload = [
-    [
+    np.array([
         [ 0.5, 1, 0, -1, -1,],
         [ 0.5, 1, 0, -1, -1,],
         [ 0.5, 1, 0, -1, -1,],
         [ 0.5, 1, 0, -1, -1,]
-    ],
-    [0],
-    [0],
+    ]),
+    0,
+    0,
     str('Increase differential preload one step.'),
     str('Increases stability during braking and turn-in in corner entry phases, but also increases throttle-steer and oversteer in corner exit phases.')
 ]
 
 decrease_diff_preload = [
-    [
+    np.array([
         [ -0.5, -1, 0, 1, 1,],
         [ -0.5, -1, 0, 1, 1,],
         [ -0.5, -1, 0, 1, 1,],
         [ -0.5, -1, 0, 1, 1,]
-    ],
-    [0],
-    [0],
+    ]),
+    0,
+    0,
     str('Decrease differential preload one step.'),
     str('Decreases stability during braking and turn-in in corner entry phases (quicker rotation), but also decreases throttle-steer and oversteer in corner exit phases. Lowering this parameter too much can cause "one-tire-fires" akin to an open differential during power application.')
 ]
@@ -143,6 +156,7 @@ increase_wingAOA = [
 #decrease_wingAOA = -increase_wingAOA
 
 tuning_options = [
+    null,
     brake_bias_forward,
     stiffen_front_ARB, soften_front_ARB,
     stiffen_rear_ARB, soften_rear_ARB,
