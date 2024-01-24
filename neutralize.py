@@ -55,7 +55,9 @@ def neutralize(iterations, initial_state, tuning_options):
             print('''
 ########## Optimizer Complete. Please READ BELOW TIPS for applying tuning changes. ########## \n
 We typically encourage to make the most significant changes (Iteration 1 and 2) first, then assess the change in handling, update the handling matrix, and perform the optimization again until the car is optimized to the driver's liking (near-0 handling matrix). Since Neutralize is agnostic to the sensitivities of any simulated car to its tuning parameters, each successive result (Iterations 3, 4...) loses accuracy. Applying multiple changes at once might be appropriate only if the chassis is significantly difficult to drive, inconsistent, or slow.
-                  
+
+Decide for yourself what a significant "step" is by paying attention to the sensitivity of each recommended change. For example, increasing a sway bar's stiffness "one step" might be very significant in a Porsche Cup Car which has 7 possible adjustments, but less significant in an Aston Martin DBR9 which has 30 possible adjustments, and so you might change the setting by two "steps" at a time on the Aston Martin. The point is to make a small but noticeable change.
+
 Allow time for the driver to adjust to the new vehcile parameters after each change before updating the handling matrix. Some changes might 'feel' better but actually be slower; always refer to lap times as the ultimate measure of a good tuning setup.
             ''')
             break

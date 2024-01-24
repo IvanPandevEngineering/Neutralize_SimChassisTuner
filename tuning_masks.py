@@ -43,6 +43,19 @@ brake_bias_forward = [
     str('Reduces rear brake lockup on initial brake application. Decreases rotation during trail-braking.')
 ]
 
+brake_bias_rearward = [
+    np.array([
+        [ -1, -1, 0, 0, 0,],
+        [ -1, -1, 0, 0, 0,],
+        [ -1, -1, 0, 0, 0,],
+        [ -1, -1, 0, 0, 0,],
+    ]),
+    0,
+    0,
+    str('One step decreasing brake bias forward %.'),
+    str('Reduces front brake lockup on initial brake application. Increases rotation during trail-braking.')
+]
+
 ### SUSPENSION TUNING PARAMETERS ###
 
 stiffen_front_ARB = [
@@ -138,28 +151,42 @@ decrease_diff_preload = [
     str('Decreases stability during braking and turn-in in corner entry phases (quicker rotation), but also decreases throttle-steer and oversteer in corner exit phases. Lowering this parameter too much can cause "one-tire-fires" akin to an open differential during power application.')
 ]
 
-#decrease_preload = -increase_preload
-
 ### AERODYNAMIC TUNING PARAMETERS ###
 
 increase_wingAOA = [
-    [
+    np.array([
         [ 0, 0, 0, 0, 0,],
         [ 0.25, 0.25, 0.25, 0.25, 0.25,],
         [ 0.5, 0.5, 0.5, 0.5, 0.5,],
         [ 1, 1, 1, 1, 1,]
-    ],
-    [0],
-    [1]
+    ]),
+    0,
+    1,
+    str('Increase rear wing angle of attack one position.'),
+    str('Increases rear grip and understeer during all corner phases at the expense of straight-line speed. Downforce effects increase exponentially with vehicle speed, and should not be used to fix low-speed behaviors.')
+]
+
+decrease_wingAOA = [
+    np.array([
+        [ 0, 0, 0, 0, 0,],
+        [ -0.25, -0.25, -0.25, -0.25, -0.25,],
+        [ -0.5, -0.5, -0.5, -0.5, -0.5,],
+        [ -1, -1, -1, -1, -1,]
+    ]),
+    0,
+    -1,
+    str('Decrease rear wing angle of attack one position.'),
+    str('Decreases rear grip and understeer during all corner phases while increasing straight-line speed. Downforce effects increase exponentially with vehicle speed, and should not be used to fix low-speed behaviors.')
 ]
 
 #decrease_wingAOA = -increase_wingAOA
 
 tuning_options = [
     null,
-    brake_bias_forward,
+    brake_bias_forward, brake_bias_rearward,
     stiffen_front_ARB, soften_front_ARB,
     stiffen_rear_ARB, soften_rear_ARB,
     increase_front_negative_camber,
-    increase_diff_preload, decrease_diff_preload
+    increase_diff_preload, decrease_diff_preload,
+    increase_wingAOA, decrease_wingAOA
 ]

@@ -43,8 +43,8 @@ chassis_initial_state = [
     ]),
     0,
     0,
-    None,
-    None
+    None,  # Do not change
+    None  # Do not change
 ]
 
 def get_user_reported_balance():
